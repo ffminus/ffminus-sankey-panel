@@ -6,3 +6,6 @@
 
 # Dependencies
 /node_modules
+
+# Signin key
+/token.txt
