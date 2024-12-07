@@ -1,8 +1,14 @@
 import { DataFrame, DataFrameView, Field, PanelProps } from '@grafana/data';
 import { PanelDataErrorView } from '@grafana/runtime';
+import { scaleOrdinal } from 'd3';
+import { sankey } from 'd3-sankey';
 import React, { FC } from 'react';
 
-import { Options } from 'options';
+import { ALIGNMENTS, COLORS, Options } from 'options';
+import { Rect } from 'types';
+
+import { Link, LinkData } from './Link';
+import { Node } from './Node';
 
 /** Sankey graph to display nodes and flows. */
 export const Sankey: FC<PanelProps<Options>> = ({ options, data, width, height, id }) => {
@@ -38,8 +44,60 @@ export const Sankey: FC<PanelProps<Options>> = ({ options, data, width, height, 
   // Prepare input data for graph
   const { nodes, links } = parse(series, id);
 
+  // Specify size of SVG with a pair
+  const dimensions: [number, number] = [width, height];
+
+  // Build Sankey graph with provided parameters
+  const graph = sankey<{ name: string }, { source: number; target: number; value: number; id: string; uid: string }>()
+    .nodeAlign(ALIGNMENTS[options.alignment])
+    .nodeWidth(options.node.width)
+    .nodePadding(options.node.padding)
+    .extent([[1, 1], dimensions])({ nodes, links });
+
+  // Pick node colors based on value or palette provided by user
+  const getColor =
+    options.node.colors.kind === 'single'
+      ? () => options.node.colors.single
+      : scaleOrdinal(COLORS[options.node.colors.palette]);
+
+  // ? Assert shape of node data coming from link object
+  const getColorOfLink =
+    options.link.colors.kind === 'single'
+      ? () => ({ source: options.link.colors.single, target: options.link.colors.single })
+      : (source: { name: string }, target: { name: string }) => ({
+          source: getColor(source.name),
+          target: getColor(target.name),
+        });
+
   return (
     <>
+      <svg width={width} height={height}>
+        <g fill="none" strokeOpacity={options.link.opacity}>
+          {graph.links.map((data, i) => (
+            <Link
+              key={`link-${i}`}
+              id={id}
+              colors={getColorOfLink(data.source as { name: string }, data.target as { name: string })}
+              data={data as LinkData}
+            />
+          ))}
+        </g>
+        <g>
+          {graph.nodes.map(({ name, value, ...rect }, i) => (
+            <Node
+              key={`node-${i}`}
+              name={name}
+              value={value as number}
+              id={`sankey-${id}-node-${i}`}
+              className={`sankey-${id}-node`}
+              color={getColor(name)}
+              rect={rect as Rect}
+              width={width}
+              label={options.node.label}
+            />
+          ))}
+        </g>
+      </svg>
     </>
   );
 };
