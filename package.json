@@ -1,5 +1,5 @@
 {
-  "name": "grafana-sankey-panel",
+  "name": "ffminus-sankey-panel",
   "version": "0.0.1",
   "description": "Sankey diagrams for Grafana.",
   "license": "MIT",

@@ -51,7 +51,7 @@
         }
       ],
       "title": "Sample Panel Title",
-      "type": "grafana-sankey-panel"
+      "type": "ffminus-sankey-panel"
     },
     {
       "datasource": {
@@ -82,7 +82,7 @@
         }
       ],
       "title": "Sample Panel Title",
-      "type": "grafana-sankey-panel"
+      "type": "ffminus-sankey-panel"
     }
   ],
   "refresh": "",

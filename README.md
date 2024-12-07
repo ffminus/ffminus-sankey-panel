@@ -1,4 +1,4 @@
-# grafana-sankey-panel
+# ffminus-sankey-panel
 
 Sankey diagrams for Grafana.
 
@@ -20,7 +20,7 @@ C,F,50
 D,E,200
 ```
 
-![](https://github.com/ffminus/grafana-sankey-panel/blob/main/src/img/screenshot.png?raw=true)
+![](https://github.com/ffminus/ffminus-sankey-panel/blob/main/src/img/screenshot.png?raw=true)
 
 ## Configuration
 

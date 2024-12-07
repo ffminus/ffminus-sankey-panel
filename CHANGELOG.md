@@ -8,4 +8,4 @@ Emoji prefixes follow the [gitmoji](https://gitmoji.dev/) guide.
 
 ## [Unreleased]
 
-[unreleased]: https://github.com/ffminus/grafana-sankey-panel
+[unreleased]: https://github.com/ffminus/ffminus-sankey-panel
