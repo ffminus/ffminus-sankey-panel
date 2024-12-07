@@ -1,4 +1,4 @@
-import { DataFrame, DataFrameView, Field, PanelProps } from '@grafana/data';
+import { DataFrame, DataFrameView, DisplayProcessor, Field, PanelProps } from '@grafana/data';
 import { PanelDataErrorView } from '@grafana/runtime';
 import { scaleOrdinal } from 'd3';
 import { sankey } from 'd3-sankey';
@@ -9,6 +9,7 @@ import { Rect } from 'types';
 
 import { Link, LinkData } from './Link';
 import { Node } from './Node';
+import { Tooltip } from './Tooltip';
 
 /** Sankey graph to display nodes and flows. */
 export const Sankey: FC<PanelProps<Options>> = ({ options, data, width, height, id }) => {
@@ -97,6 +98,7 @@ export const Sankey: FC<PanelProps<Options>> = ({ options, data, width, height, 
             />
           ))}
         </g>
+        <Tooltip id={id} fmt={values.display as DisplayProcessor} opacity={options.link.opacity} />
       </svg>
     </>
   );
