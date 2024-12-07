@@ -8,4 +8,11 @@ Emoji prefixes follow the [gitmoji](https://gitmoji.dev/) guide.
 
 ## [Unreleased]
 
-[unreleased]: https://github.com/ffminus/ffminus-sankey-panel
+## [0.1.0] - 2024-12-08
+
+### Added
+
+- ✨ Create Sankey plugin MVP
+
+[unreleased]: https://github.com/ffminus/ffminus-sankey-panel/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/ffminus/ffminus-sankey-panel/releases/tag/v0.1.0

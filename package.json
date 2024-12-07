@@ -1,6 +1,6 @@
 {
   "name": "ffminus-sankey-panel",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Sankey diagrams for Grafana.",
   "license": "MIT",
   "author": "ffminus <ffminus@protonmail.com>",
